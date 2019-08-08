@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      body{
+        margin:0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: whitesmoke;
+
+      }
+      .text{
+        background-color: white;
+        width:800px;
+        padding:10px;
+        border:1px solid black;
+        border-radius:5px;
+        margin-bottom:50px;
+      }
+      .tab{
+        padding:3px 5px;
+           margin: 0 10px 10px 0;
+           border:1px solid #cccccc;
+           border-radius: 3px;
+           display: block;
+      }
+      .drag{
+        background-color: white;
+        width:800px;
+        padding:10px;
+        border:1px solid black;
+        border-radius:5px;
+        height:350px;
+      }
+      .newtab{
+        padding:3px 5px;
+        margin:0 10px 10px 0;
+        display:inline-block;
+        border:1px dashed grey;
+        border-radius:3px;
+      }
+      </style>
+
+  </head>
+  <body>
+    <H1>DRAG THE TEXT</H1>
+    <div class="text">
+      <span class="tab">When you are old and grey and full of sleep,</span>
+      <span class="tab">And nodding by the fire, take down this book,</span>
+      <span class="tab">And slowly read, and dream of the soft look</span>
+      <span class="tab">Your eyes had once, and of their shadows deep;</span>
+      <span class="tab">How many loved your moments of glad grace,</span>
+      <span class="tab">And loved your beauty with love false or true,</span>
+      <span class="tab">But one man loved the pilgrim Soul in you,</span>
+      <span class="tab">And loved the sorrows of your changing face;</span>
+      <span class="tab">And bending down beside the glowing bars,</span>
+      <span class="tab">Murmur, a little sadly, how Love fled</span>
+      <span class="tab">And paced upon the mountains overhead</span>
+      <span class="tab">And hid his face amid a crowd of stars.</span>
+    </div>
+    <div class="drag">
+      </div>
+      <script type="text/javascript">
+        document.addEventListener("drag",function(e){},false)
+        document.addEventListener("dragstart",function(e){
+          console.log("dragstart")
+          var NY=false;
+          var elemClassName=event.target.parentNode.className;
+          event.dataTransfer.setData("NY",elemClassName == "tab"?true:false);
+        })
+        document.addEventListener("dragover",function(e){
+          e.preventDefault();
+
+        })
+        document.addEventListener("drop",function(e){
+
+          e.preventDefault();
+          console.log("drop");
+          var text = event.dataTransfer.getData("text");
+          var NY=event.dataTransfer.getData("NY")
+          if(NY="true")
+          {
+            var n=document.createElement("span")
+            n.setAttribute("class","newtab")
+            n.innerHTML=text
+            e.target.appendChild(n)
+          }
+        },false)
+      </script>
+  </body>
+</html>
